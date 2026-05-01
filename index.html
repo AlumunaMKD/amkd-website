@@ -431,7 +431,10 @@
     padding:clamp(2rem,4vw,3rem);
     position:relative;
     overflow:hidden;
-    display:flex;flex-direction:column;
+    display:grid;
+    grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);
+    gap:clamp(1.5rem,3vw,2.5rem);
+    align-items:stretch;
     min-height:480px;
   }
   .event-featured::before{
@@ -440,7 +443,65 @@
     width:60%;aspect-ratio:1;
     border-radius:50%;
     background:radial-gradient(circle, var(--terracotta) 0%, transparent 70%);
-    opacity:.5;
+    opacity:.4;
+    pointer-events:none;
+  }
+  .event-poster{
+    position:relative;z-index:1;
+    border-radius:var(--radius-lg);
+    overflow:hidden;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,.5),
+               0 0 0 1px rgba(232,199,106,.15);
+    align-self:center;
+    background:#000;
+  }
+  .event-poster img{
+    display:block;width:100%;height:auto;
+  }
+  .event-info{
+    display:flex;flex-direction:column;
+    position:relative;z-index:1;
+    min-width:0;
+  }
+  /* Country contacts */
+  .event-contacts{
+    margin-top:auto;
+    padding-top:1.75rem;
+    border-top:1px solid rgba(255,255,255,.15);
+    display:grid;grid-template-columns:1fr 1fr;
+    gap:.65rem 1.25rem;
+  }
+  .event-contacts .contacts-title{
+    grid-column:1/-1;
+    font-size:.72rem;letter-spacing:.18em;
+    text-transform:uppercase;
+    color:rgba(232,199,106,.85);
+    margin-bottom:.25rem;
+  }
+  .event-contact{
+    display:flex;align-items:center;gap:.55rem;
+    color:rgba(250,246,238,.92);
+    text-decoration:none;
+    font-size:.85rem;
+    transition:color .25s,transform .25s;
+  }
+  .event-contact:hover{color:#E8C76A;transform:translateX(2px)}
+  .event-contact .flag{
+    font-size:1.1rem;line-height:1;
+    flex-shrink:0;
+  }
+  .event-contact .ctry{
+    color:rgba(250,246,238,.6);
+    margin-right:.15rem;
+  }
+  .event-contact .num{
+    font-variant-numeric:tabular-nums;
+    white-space:nowrap;
+  }
+  @media (max-width:780px){
+    .event-featured{grid-template-columns:1fr;min-height:0}
+    .event-poster{max-width:380px;margin:0 auto}
+    .event-contacts{grid-template-columns:1fr}
   }
   .event-pill{
     display:inline-flex;align-items:center;gap:.5rem;
@@ -979,24 +1040,62 @@
 
   <div class="events-layout">
     <article class="event-featured reveal">
-      <div class="event-pill" data-en="Featured">Em destaque</div>
-      <h3>
-        <span data-en="1st AMKD Congress">1º Congresso AMKD</span><br>
-        <em data-en="23 May · 2026">23 de Maio · 2026</em>
-      </h3>
-      <p data-en="Four hours of meeting, decisions and celebration. The community gathers to elect the new board, hear the report on the first five years and chart the next steps. We close with a community dinner.">Quatro horas de encontro, decisões e celebração. A comunidade reúne-se para eleger o novo corpo diretivo, ouvir o relatório dos primeiros cinco anos e traçar os próximos passos. Encerramos com jantar de confraternização.</p>
-      <div class="event-meta">
-        <div>
-          <strong data-en="23 May">23 Mai</strong>
-          <span data-en="Saturday">Sábado</span>
+      <a href="congresso-amkd-2026.jpg" target="_blank" rel="noopener" class="event-poster" aria-label="Ver cartaz em tamanho maior">
+        <img src="congresso-amkd-2026.jpg" alt="Cartaz oficial do 1º Congresso da Associação AMKD — 22 a 24 de Maio de 2026, Antuérpia, Bélgica" loading="lazy">
+      </a>
+      <div class="event-info">
+        <div class="event-pill" data-en="Featured">Em destaque</div>
+        <h3>
+          <span data-en="1st AMKD Congress">1º Congresso AMKD</span><br>
+          <em data-en="22–24 May · 2026">22 a 24 de Maio · 2026</em>
+        </h3>
+        <p data-en="Three days of meetings, decisions and celebration. The community gathers in Antwerp to elect the new board, hear the report of the first years and chart the next steps together. Your participation strengthens our association.">Três dias de encontro, decisões e celebração. A comunidade reúne-se em Antuérpia para eleger o novo corpo diretivo, ouvir o relatório dos primeiros anos e traçar juntos os próximos passos. <em>A tua participação fortalece a nossa associação.</em></p>
+        <div class="event-meta">
+          <div>
+            <strong data-en="22–24 May">22–24 Mai</strong>
+            <span data-en="Friday to Sunday">Sex. a Dom.</span>
+          </div>
+          <div>
+            <strong>14:00 – 18:00</strong>
+            <span data-en="Daily schedule">Horário diário</span>
+          </div>
+          <div>
+            <strong data-en="Antwerp">Antuérpia</strong>
+            <span data-en="Belgium">Bélgica</span>
+          </div>
         </div>
-        <div>
-          <strong>14:00</strong>
-          <span data-en="until 18:00">até 18:00</span>
-        </div>
-        <div>
-          <strong data-en="Antwerp">Antuérpia</strong>
-          <span data-en="Belgium">Bélgica</span>
+        <div class="event-contacts">
+          <div class="contacts-title" data-en="Information · per country">Informações · por país</div>
+          <a href="tel:+4915901430561" class="event-contact">
+            <span class="flag">🇩🇪</span>
+            <span class="ctry">DE</span>
+            <span class="num">+49 1590 1430561</span>
+          </a>
+          <a href="tel:+32492156972" class="event-contact">
+            <span class="flag">🇧🇪</span>
+            <span class="ctry">BE</span>
+            <span class="num">+32 492 156 972</span>
+          </a>
+          <a href="tel:+31644101848" class="event-contact">
+            <span class="flag">🇳🇱</span>
+            <span class="ctry">NL</span>
+            <span class="num">+31 644 101 848</span>
+          </a>
+          <a href="tel:+351962090721" class="event-contact">
+            <span class="flag">🇵🇹</span>
+            <span class="ctry">PT</span>
+            <span class="num">+351 962 090 721</span>
+          </a>
+          <a href="tel:+4741385695" class="event-contact">
+            <span class="flag">🇸🇪</span>
+            <span class="ctry">SE</span>
+            <span class="num">+47 41 38 56 95</span>
+          </a>
+          <a href="tel:+447950802270" class="event-contact">
+            <span class="flag">🇬🇧</span>
+            <span class="ctry">UK</span>
+            <span class="num">+44 7950 802 270</span>
+          </a>
         </div>
       </div>
     </article>
